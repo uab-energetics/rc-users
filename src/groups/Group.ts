@@ -4,11 +4,11 @@ import {Member} from "./Member";
 @Entity()
 export class Group {
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
-    @Column('uuid')
-    uuid: string
+    @Column('varchar')
+    projectID: string
 
     @Column('varchar')
     name: string
