@@ -3,14 +3,14 @@ import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
-import {getConfigHelper} from "./core/config/config";
-import {getConfig} from "./_config";
-import {connectToRabbitMQ} from "./core/messaging/connect";
-import {httpErrorHandler} from "./core/errors/httpErrorHandler";
-import {connectToDB} from "./core/database/mysql/connect";
-import {useRoute} from "./core/routing/route-builder";
-import {RouteNotFound} from "./core/errors/RouteNotFound";
-import {getEventHelper} from "./core/events/event";
+import {getConfigHelper} from "./core/config/config"
+import {getConfig} from "./_config"
+import {connectToRabbitMQ} from "./core/messaging/connect"
+import {httpErrorHandler} from "./core/errors/httpErrorHandler"
+import {connectToDB} from "./core/database/mysql/connect"
+import {useRoute} from "./core/routing/route-builder"
+import {RouteNotFound} from "./core/errors/RouteNotFound"
+import {getEventHelper} from "./core/events/event"
 
 /**
  * COMPOSITION ROOT
