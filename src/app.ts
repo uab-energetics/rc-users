@@ -12,6 +12,9 @@ import {useRoute} from "./core/routing/route-builder"
 import {RouteNotFound} from "./core/errors/RouteNotFound"
 import {getEventHelper} from "./core/events/event"
 import {createGroupRoute} from "./groups/routes/create-group";
+import {addMemberRoute} from "./groups/routes/add-member";
+import {listMembersRoute} from "./groups/routes/list-members";
+import {listGroupsRoute} from "./groups/routes/list-groups";
 
 /**
  * COMPOSITION ROOT
@@ -43,6 +46,9 @@ export const getApp = async () => {
 
 
     useRoute(app, createGroupRoute({ dbConn }))
+    useRoute(app, addMemberRoute({ dbConn, event }))
+    useRoute(app, listMembersRoute({ dbConn }))
+    useRoute(app, listGroupsRoute({ dbConn }))
 
 
     app.use((req, res, next) => next(new RouteNotFound()))
