@@ -4,6 +4,8 @@ import {BadRequestError} from "../validation/errors/BadRequestError";
 
 export const httpErrorHandler = (err, req, res, next) => {
 
+    console.log(err)
+
     if (err instanceof BadRequestError) {
         res.status(err.statusCode).json({
             msg: err.message,

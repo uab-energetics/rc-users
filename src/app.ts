@@ -17,6 +17,7 @@ import {listMembersRoute} from "./groups/routes/list-members";
 import {listGroupsRoute} from "./groups/routes/list-groups";
 import {removeGroupRoute} from "./groups/routes/remove-group";
 import {removeMembersRoute} from "./groups/routes/remove-members";
+import {registerRabbitDispatcherListeners} from "./groups/listeners/rabbit-dispatcher";
 
 /**
  * COMPOSITION ROOT
@@ -46,14 +47,14 @@ export const getApp = async () => {
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(morgan('dev'))
 
-
-    useRoute(app, createGroupRoute({ dbConn }))
+    useRoute(app, createGroupRoute({ dbConn, event }))
     useRoute(app, addMemberRoute({ dbConn, event }))
     useRoute(app, listMembersRoute({ dbConn }))
     useRoute(app, listGroupsRoute({ dbConn }))
-    useRoute(app, removeGroupRoute({ dbConn }))
-    useRoute(app, removeMembersRoute({ dbConn }))
+    useRoute(app, removeGroupRoute({ dbConn, event }))
+    useRoute(app, removeMembersRoute({ dbConn, event }))
 
+    registerRabbitDispatcherListeners({ eventEmitter: app })
 
     app.use((req, res, next) => next(new RouteNotFound()))
 

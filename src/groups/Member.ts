@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Group} from "./Group";
 
 @Entity()
@@ -11,6 +11,6 @@ export class Member {
     email: string
 
     @ManyToOne(type => Group, group => group.members, { onDelete: "CASCADE" })
-    @JoinColumn()
+    @JoinColumn({name: 'groupID'})
     group: Group
 }
