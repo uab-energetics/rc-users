@@ -10,7 +10,7 @@ export class Member {
     @Column('varchar')
     email: string
 
-    @ManyToOne(type => Group, group => group.members )
+    @ManyToOne(type => Group, group => group.members, { onDelete: "CASCADE" })
     @JoinColumn()
     group: Group
 }
