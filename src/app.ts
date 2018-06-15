@@ -11,6 +11,7 @@ import {connectToDB} from "./core/database/mysql/connect"
 import {useRoute} from "./core/routing/route-builder"
 import {RouteNotFound} from "./core/errors/RouteNotFound"
 import {getEventHelper} from "./core/events/event"
+import {createGroupRoute} from "./groups/routes/create-group";
 
 /**
  * COMPOSITION ROOT
@@ -21,7 +22,6 @@ export const getApp = async () => {
     // load environment and config
     dotenv.config({ path: ".env" })
     const config = getConfigHelper(getConfig(process.env))
-
 
     // connect to message broker
     let { channel, connection } = await connectToRabbitMQ({ config })
@@ -40,6 +40,10 @@ export const getApp = async () => {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(morgan('dev'))
+
+
+    useRoute(app, createGroupRoute({ dbConn }))
+
 
     app.use((req, res, next) => next(new RouteNotFound()))
 

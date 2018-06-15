@@ -17,6 +17,7 @@ export const connectToDB = async ({ config }) => {
             logging: false
         })
     } catch (e) {
+        console.error(e)
         throw new DBConnectionError("Failed to connect to MySQL", config('mysql'))
     }
 }

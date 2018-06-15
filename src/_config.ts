@@ -14,7 +14,7 @@ export const getConfig = (env) => ({
         host: env.MYSQL_HOST || 'localhost',
         user: env.MYSQL_USER || 'root',
         pass: env.MYSQL_PASS || 'secret',
-        database: env.MYSQL_DB || 'users'
+        database: env.MYSQL_DB || 'rc_users'
     }
 
 })
