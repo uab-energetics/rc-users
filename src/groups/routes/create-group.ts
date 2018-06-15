@@ -9,7 +9,9 @@ export const createGroupRoute = ({ dbConn }): Route => ({
 
     mapper: req => req.body,
 
-    controller: async ({ name }) => {
-        return await dbConn.manager.create(Group, { name })
+    controller: async ({ groups }) => {
+        let groupEntities: Group[] = groups.map( G => dbConn.manager.create(Group, G))
+        await dbConn.manager.save(groupEntities)
+        return groupEntities
     }
 })
