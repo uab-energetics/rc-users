@@ -35,8 +35,21 @@ test("Groups Test", async () => {
     let list_groups_res = await request(app)
         .get(`/projects/12/groups`)
 
+    /* Remove Members */
+    let remove_members_res = await request(app)
+        .post(`/groups/${create_group_res.body[0].id}/members/remove`)
+        .send({
+            memberIDs: [add_member_res.body.members[0].id]
+        })
+
+    /* Remove Group */
+    let remove_group_res = await request(app)
+        .delete(`/groups/${create_group_res.body[0].id}`)
+
     console.log(create_group_res.body)
     console.log(add_member_res.body)
     console.log(list_members_res.body)
     console.log(list_groups_res.body)
+    console.log(remove_members_res.body)
+    console.log(remove_group_res.body)
 })
